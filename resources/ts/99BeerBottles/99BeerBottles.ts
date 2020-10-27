@@ -1,5 +1,6 @@
 /**
- * One-hundred bottles of beer on the wall,
+https://lyricsplayground.com/alpha/songs/numbers/99bottlesofbeeronthewall.html *
+One-hundred bottles of beer on the wall,
 One-hundred bottles of beer!
 Take one down,
 Pass it around,
@@ -21,12 +22,12 @@ No more bottles of beer on the wall!
  * 
  */
 
-const LINE1 = " bottles of beer on the wall, \n";
-const LINE2 = " bottles of beer! \n";
+const LINE1 = " of beer on the wall, \n";
+const LINE2 = " of beer! \n";
 const LINE3And4 = "Take one down,\nPass it around, \n";
 const LINE5 = " bottles of beer on the wall!\n";
 const NO_MORE = "No more";
-const ONE_BOTTLE = "One bottle of beer on the wall!";
+const ONE_BOTTLE = "One bottle of beer on the wall!\n";
 
 var onesMap = new Map([
 	[9, "nine"],
@@ -67,15 +68,16 @@ var teensMap = new Map([
 ]);
 
 console.log("");
-var totalNumBottles: number = 10;
+var totalNumBottles: number = 100;
 for (var c = totalNumBottles; c > 0; c--) {
 	printLyrics(c);
 }
 
 function printLyrics(numberBottles: number) {	
 	var numStr: string = convertNumberToWords(numberBottles);
-	var msg = numStr + LINE1 + 
-			  numStr + LINE2 + 
+	var bottleWord: string = getBottleWord(numberBottles);
+	var msg = numStr + bottleWord + LINE1 + 
+			  numStr + bottleWord + LINE2 + 
 			  LINE3And4 + 
 			  getLastLine(numberBottles);
 	
@@ -86,7 +88,7 @@ function getLastLine(numberBottles: number){
 		var lastMsg: string;
 		if(numberBottles-1 == 0){
 			lastMsg = NO_MORE + LINE5;
-		}else if(numberBottles == 1){
+		}else if(numberBottles-1 == 1){
 			lastMsg = ONE_BOTTLE;
 		} else {
 			lastMsg = convertNumberToWords(numberBottles-1) + LINE5;
@@ -101,21 +103,26 @@ function convertNumberToWords(numberBottles: number) {
 	}
 	var rem: number = numberBottles % 10;
 	var quo: number = Math.floor(numberBottles / 10) ;//parseInt((numberBottles / 10).toFixed());
-	
-	
-	//console.log("numberBottles:"+numberBottles + " quotient:"+ quo + " rem:"+rem);
-	//console.log("numberBottles:"+numberBottles);
+
 	if(rem<=0){
 		return tensMap.get(quo);
 	}else if(numberBottles>10&&numberBottles<20){
 		return teensMap.get(numberBottles);
-	}else if(numberBottles<10){
-		return onesMap.get(numberBottles);
+	}else if(numberBottles<10){				
+		return toUpperCaseFirstLetter(onesMap.get(numberBottles));
 	}else{
 		return tensMap.get(quo) + "-" + onesMap.get(rem);
 	}
 
 }
 
+function toUpperCaseFirstLetter(figure:string){
+	
+	return figure.charAt(0).toUpperCase() + figure.slice(1);
+}
 
+function getBottleWord(numberBottles: number){
+	return (numberBottles == 1 ? " bottle":" bottles");
+	
+}
 
