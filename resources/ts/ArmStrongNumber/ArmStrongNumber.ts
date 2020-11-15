@@ -16,7 +16,7 @@ for(let p = 1; p < 10000; p++){
 }
 
 function isArmStrongNumber(inputNum:number){
-	let isArmStrong:boolean = false;
+
 	
 	let numS: string  = inputNum.toString();
 	let n: number = numS.length;
