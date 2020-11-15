@@ -24,12 +24,12 @@ function isArmStrongNumber(inputNum:number){
 	for(let p = 0; p < n; p++){
 		sum += Math.pow(parseInt(numS.charAt(p)),n)		
 	}
-	isArmStrong = (sum==inputNum);
-	if(isArmStrong){
-		console.log("Is " + inputNum + " an Armstrong number? " + (isArmStrong));	
+
+	if(sum==inputNum){
+		console.log("Is " + inputNum + " an Armstrong number? TRUE ");
 	}
 	
 	
-	return isArmStrong;
+
 }
 
